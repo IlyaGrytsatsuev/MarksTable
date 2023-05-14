@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{'/Forms/editMark:form=' + ${form_id} +
+        ':subject=' + ${subject_id} + ':student='
+         + ${student_id} + ':mark=' + ${mark_id}}" th:method="PATCH" >
+  <input type="text" name="mark_value" placeholder="mark value">
+  <input type="submit">
+</form>
+<form th:action="@{'/Forms/deleteMark:form=' + ${form_id} +
+        ':subject=' + ${subject_id} + ':student='
+         + ${student_id} + ':mark=' + ${mark_id}}" th:method="Delete" >
+   <input type="submit" value="Delete">
+</form>
+
+</body>
+</html>

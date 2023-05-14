@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<body>
+<tr th:if="${students.empty}">
+    <td colspan="2"> No students added
+    </td>
+</tr>
+<br>
+<a th:href="@{'/Forms/addStudent:form=' + ${form_id} }">Add new Student</a>|
+<a th:href="@{'/Forms/form=' + ${form_id} + '/Subjects'}">Subjects</a>
+<br>
+<br>
+<tr th:each="student : ${students}">
+
+    <a th:href="@{'/Forms/Students:form=' + ${student.getForm_id()}
+    +'/Subjects:student=' + ${student.getId()} }" th:text="${student.getName()}
+    + ' ' + ${student.getSurname()}"> Title </a>
+    <br>
+    <form th:action="@{'/Forms/editStudent:form=' + ${student.getForm_id()}}" th:method="GET">
+        <input type="submit" value="Edit">
+    </form>
+    <form th:action="@{'/Forms/deleteStudent:form=' + ${student.getForm_id()} + ':student=' + ${student.getId()}}" th:method="Delete">
+        <input type="submit" value="Delete">
+    </form>
+    <br>
+</tr>
+</body>
+</html>

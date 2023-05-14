@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marks</title>
+</head>
+<body>
+
+<a th:href="@{'/Forms/addMark:form=' +
+    ${form_id} +':subject=' + ${subject.getId()} + ':student=' + ${subject.getStudent_id()}}"> add new mark</a>
+<table>
+
+    <tr th:if="${subject.getMarks().empty}">
+        <td> No marks added </td>
+    </tr>
+
+    <tr>
+        <th th:each="date : ${dates}" th:text="${date}"></th>
+    </tr>
+    <tr>
+        <td th:each="mark : ${marks}"> <a th:href="@{'/Forms/editMark:form=' + ${form_id} +
+        ':subject=' + ${subject.getId()} + ':student='
+         + ${subject.getStudent_id()} + ':mark='
+          + ${mark.getKey()}}" th:text="${mark.getValue()}">mark</a></td>
+    </tr>
+</table>
+
+</div>
+</body>
+</html>
