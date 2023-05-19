@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{'/Forms/form=' + ${form_id} + '/Subjects'}">Back</a>
+<a th:href="@{/Forms}">
+    Home</a>
+
+<form th:action="@{'/Forms/editSubject:form=' + ${form_id} + ':subject=' + ${subject_id} }" th:method="PATCH" >
+    <input type="text" name="subject_name" th:value="${subject_name}" placeholder="name">
+    <input type="submit">
+</form>
+
+</body>
+</html>

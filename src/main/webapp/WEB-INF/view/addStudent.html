@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+<a th:href="@{'/Forms/Students:form=' + ${form_id}}">Back</a>
+<a th:href="@{/Forms}">
+    Home</a>
+
 <form th:action="@{'/Forms/addStudent:form=' + ${form_id}}" th:method="POST" >
     <input type="text" name="name" placeholder="name">
     <input type="text" name="surname" placeholder="surname">

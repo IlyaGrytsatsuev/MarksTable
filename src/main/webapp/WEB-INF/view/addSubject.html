@@ -5,6 +5,9 @@
     <title>addSubject</title>
 </head>
 <body>
+<a th:href="@{'/Forms/form=' + ${form_id} + '/Subjects'}">Back</a>
+<a th:href="@{/Forms}">
+    Home</a>
 <form th:method="post" th:action="@{'/Forms/addSubject:form=' + ${form_id}}">
     <input type="text" name="subject_name">
     <input type="submit" value="Add">

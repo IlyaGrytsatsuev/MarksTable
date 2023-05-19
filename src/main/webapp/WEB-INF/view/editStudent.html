@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{'/Forms/Students:form=' + ${form_id}}">Back</a>
+<a th:href="@{/Forms}">
+    Home</a>
+<form th:action="@{'/Forms/editStudent:form=' + ${form_id} + ':student=' + ${student_id} }" th:method="PATCH" >
+  <input type="text" name="name" th:value="${student.getName()}" placeholder="name">
+  <input type="text" name="surname" th:value="${student.getSurname()}" placeholder="surname">
+  <input type="submit">
+</form>
+</body>
+</html>

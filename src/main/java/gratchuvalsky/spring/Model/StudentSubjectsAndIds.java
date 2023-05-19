@@ -3,14 +3,41 @@ package gratchuvalsky.spring.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectsAndIds {
+public class StudentSubjectsAndIds {
     private int form_id;
+    private int student_id;
+    private String name;
+    private String surname;
     private List<Integer> subject_ids;
     private List<String> subject_names;
 
-    public SubjectsAndIds(){
+    public StudentSubjectsAndIds(){
         subject_ids = new ArrayList<>();
         subject_names = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setStudent_id(int student_id) {
+        this.student_id = student_id;
+    }
+
+    public int getStudent_id() {
+        return student_id;
     }
 
     public int getForm_id() {

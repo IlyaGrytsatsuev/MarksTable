@@ -1,0 +1,59 @@
+/* Установка общего фона и шрифта */
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+/* Стили для ссылок */
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для кнопок */
+input[type="submit"] {
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #004080;
+}
+
+/* Стили для таблицы */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+/* Стили для сообщения, когда нет добавленных форм */
+td[colspan="2"] {
+    font-style: italic;
+    color: #888;
+}
+
+/* Отступы и выравнивание */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}

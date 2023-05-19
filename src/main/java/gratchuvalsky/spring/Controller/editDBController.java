@@ -3,12 +3,10 @@ package gratchuvalsky.spring.Controller;
 import gratchuvalsky.spring.DAO.MarksTablesDao;
 import gratchuvalsky.spring.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -23,16 +21,6 @@ public class editDBController {
         this.dao = dao;
     }
 
-    @GetMapping("/Edit")
-    public String EditPage(){
-        return "editPage";
-    }
-
-    @PostMapping("/addSubject")
-    public String addSubject(@RequestParam("name") String value){
-        dao.addSubject(value,1);
-        return "redirect:/Edit";
-    }
 
     @GetMapping("/addMark:form={form_id}:subject={subject_id}:student={student_id}")
     public String addMarkForm(@PathVariable("form_id") int form_id, @PathVariable("subject_id") int subject_id,
@@ -68,12 +56,13 @@ public class editDBController {
 
     @GetMapping("/Students:form={form_id}/Subjects:student={student_id}")
     public String getSubjectsList(@PathVariable("form_id") int form_id, @PathVariable("student_id") int student_id, Model model ){
-        StudentSubjectsList subjectsList = dao.getStudentSubjects(student_id, form_id);
+        StudentSubjectsAndIds subjectsList = dao.getStudentSubjects(student_id, form_id);
 
+        //System.out.println(subjectsList.getName() + " " + subjectsList.getSurname());
         model.addAttribute("form_id", form_id);
         model.addAttribute("subjectsList", subjectsList);
-        model.addAttribute("subjects_names", subjectsList.getSubjects_names());
-        model.addAttribute("subjects_ids", subjectsList.getSubjects_ids());
+        model.addAttribute("subjects_names", subjectsList.getSubject_names());
+        model.addAttribute("subjects_ids", subjectsList.getSubject_ids());
 
         return "SubjectsList";
     }
@@ -178,6 +167,22 @@ public class editDBController {
         dao.deleteStudent(student_id);
         return "redirect:/Forms/Students:form=" + form_id ;
     }
+    @GetMapping("/editStudent:form={form_id}:student={student_id}")
+    public String getEditStudent(@PathVariable("form_id") int form_id, @PathVariable("student_id") int student_id, Model model ){
+        StudentNameAndSurname student  = dao.getStudent(student_id);
+        model.addAttribute("form_id", form_id);
+        model.addAttribute("student_id", student_id);
+        model.addAttribute("student", student);
+
+        return "editStudent" ;
+    }
+    @PatchMapping("editStudent:form={form_id}:student={student_id}")
+    public String editStudent(@PathVariable("form_id") int form_id, @PathVariable("student_id") int student_id, @RequestParam("name") String name,
+                              @RequestParam("surname") String surname){
+        dao.editStudentNameSurname(name, surname, student_id);
+
+        return "redirect:/Forms/Students:form=" + form_id ;
+    }
 
     @GetMapping("/addSubject:form={form_id}")
     public String getAddSubject(@PathVariable("form_id") int form_id, Model model){
@@ -187,7 +192,7 @@ public class editDBController {
 
     @GetMapping("/form={form_id}/Subjects")
     public String FormSubjects(@PathVariable("form_id") int form_id, Model model){
-        SubjectsAndIds res = dao.getFormSubjects(form_id);
+        StudentSubjectsAndIds res = dao.getFormSubjects(form_id);
         model.addAttribute("subjects_names", res.getSubject_names());
         model.addAttribute("subjects_ids", res.getSubject_ids());
         model.addAttribute("res", res);
@@ -200,11 +205,34 @@ public class editDBController {
         return "redirect:/Forms/form=" + form_id + "/Subjects";
     }
 
-    @DeleteMapping("/deleteSubject:subject={subject_id}")
-    public String deleteSubject(@PathVariable("subject_id") int subject_id, @RequestParam("form_id") int form_id){
+    @DeleteMapping("/deleteSubject:form={form_id}:subject={subject_id}")
+    public String deleteSubject(@PathVariable("subject_id") int subject_id,
+                                @PathVariable("form_id") int form_id){
         dao.deleteSubject(subject_id);
         return "redirect:/Forms/form=" + form_id + "/Subjects";
     }
+
+    @GetMapping("/editSubject:form={form_id}:subject={subject_id}")
+    public String getEditSubject(@PathVariable("subject_id") int subject_id,
+                                 @PathVariable("form_id") int form_id, Model model){
+
+        String subject_name = dao.getSubjectName(subject_id);
+        model.addAttribute("subject_id", subject_id);
+        model.addAttribute("form_id", form_id);
+        model.addAttribute("subject_name", subject_name);
+        return "editSubject";
+    }
+
+    @PatchMapping("/editSubject:form={form_id}:subject={subject_id}")
+    public String editSubject(@PathVariable("subject_id") int subject_id,
+                              @PathVariable("form_id") int form_id,
+                              @RequestParam("subject_name") String subject_name){
+
+        dao.editSubject(subject_id, subject_name);
+
+        return "redirect:/Forms/form=" + form_id + "/Subjects";
+    }
+
 
 
 

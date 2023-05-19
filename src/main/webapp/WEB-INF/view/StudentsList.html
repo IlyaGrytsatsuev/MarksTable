@@ -10,7 +10,10 @@
     </td>
 </tr>
 <br>
-<a th:href="@{'/Forms/addStudent:form=' + ${form_id} }">Add new Student</a>|
+<a th:href = "@{'/Forms'}">Back</a>
+<br>
+<br>
+<a th:href="@{'/Forms/addStudent:form=' + ${form_id} }">Add new Student</a>
 <a th:href="@{'/Forms/form=' + ${form_id} + '/Subjects'}">Subjects</a>
 <br>
 <br>
@@ -20,7 +23,7 @@
     +'/Subjects:student=' + ${student.getId()} }" th:text="${student.getName()}
     + ' ' + ${student.getSurname()}"> Title </a>
     <br>
-    <form th:action="@{'/Forms/editStudent:form=' + ${student.getForm_id()}}" th:method="GET">
+    <form th:action="@{'/Forms/editStudent:form=' + ${student.getForm_id()} + ':student=' + ${student.getId()}}" th:method="GET">
         <input type="submit" value="Edit">
     </form>
     <form th:action="@{'/Forms/deleteStudent:form=' + ${student.getForm_id()} + ':student=' + ${student.getId()}}" th:method="Delete">

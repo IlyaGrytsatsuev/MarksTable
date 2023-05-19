@@ -5,7 +5,14 @@
     <title>Marks</title>
 </head>
 <body>
-
+<a th:href="@{'/Forms/Students:form=' + ${form_id} +'/Subjects:student=' +${student_id}}">
+    Back</a>
+<a th:href="@{/Forms}">
+    Home</a>
+<hr>
+<p th:text = "${subject.getName()}">name
+</p>
+<hr>
 <a th:href="@{'/Forms/addMark:form=' +
     ${form_id} +':subject=' + ${subject.getId()} + ':student=' + ${subject.getStudent_id()}}"> add new mark</a>
 <table>

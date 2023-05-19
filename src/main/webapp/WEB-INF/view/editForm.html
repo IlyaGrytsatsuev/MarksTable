@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<a th:href="@{/Forms}">Back</a>
 <form th:action="@{'/Forms/editForm:form=' + ${form_id} }" th:method="PATCH" >
   <input type="text" name="form_name" placeholder="form_name">
   <input type="submit">

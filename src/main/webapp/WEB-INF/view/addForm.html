@@ -5,6 +5,8 @@
     <title>Title</title>
 </head>
 <body>
+<a th:href="@{/Forms}">Back</a>
+<br>
 <form th:action="@{/Forms/addForm}" th:method="POST" >
   <input type="text" name="form_name" placeholder="form name">
   <input type="submit">

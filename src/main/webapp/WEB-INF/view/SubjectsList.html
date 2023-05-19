@@ -6,19 +6,26 @@
 </head>
 <body>
 
-<p th:text = "${subjectsList.getStudentName()} + ' ' + ${subjectsList.getStudentSurname()}">name</p>
-<a th:href="@{'/Forms/addSubject:form=' + ${form_id}}"></a>
+<a th:href="@{'/Forms/Students:form=' + ${form_id}}">
+Back</a>
+<a th:href="@{/Forms}">
+    Home</a>
+
+<p th:text = "${subjectsList.getName()} + ' ' + ${subjectsList.getSurname()}">name
+</p>
 <hr>
 
 <tr th:if="${subjects_ids.empty}">
-    <td colspan="2"> No subjects added </td>
+    <td colspan="2"> No subjects added
+    </td>
 </tr>
 <br>
 
 <tr th:each="subject_name : ${subjects_names}">
     <a th:text="${subject_name}" th:href="@{'/Forms/Students:form='
     + ${subjectsList.getForm_id()} + '/Subjects:student=' + ${subjectsList.getStudent_id()}
-    + '/Marks:subject=' + ${subjects_ids.get(subjects_names.indexOf(subject_name))}}">name</a>
+    + '/Marks:subject=' + ${subjects_ids.get(subjects_names.indexOf(subject_name))}}">name
+    </a>
     <br>
 </tr>
 
