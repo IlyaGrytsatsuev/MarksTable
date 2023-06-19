@@ -11,7 +11,7 @@ form{
     display: flex;
 
 }
-.forms-list{
+.subjects-list{
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -25,7 +25,11 @@ nav {
 
 }
 
-nav a {
+nav div{
+    margin-top: 18px;
+}
+
+.links a {
     text-decoration: none;
     color: blue;
     font-weight: bold;
@@ -52,23 +56,18 @@ input{
     padding: 0.3em 0.6em;
     margin: 3px;
 }
-.form-card{
+.subject-card{
+    display: flex;
     margin:5px;
     border: 1.5px solid blue;
     border-radius: 5px;
 }
-.form-span{
-    display: flex;
-}
-.form-span a{
+
+form{
     color: blue;
 }
-.form-link{
+.subject-card a{
     margin: 3px;
     margin-top: 5px;
+    color:blue;
 }
-
-
-
-
-

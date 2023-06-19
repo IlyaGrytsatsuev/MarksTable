@@ -5,7 +5,8 @@ import java.util.*;
 
 public class Subject {
 
-    private int id;
+    private int id ;
+    private boolean isEmpty = true;
     private String name;
 
     private Map<Integer, Integer> marks;
@@ -20,7 +21,14 @@ public class Subject {
         dates = new ArrayList<>();
     }
 
-   /* public Subject(int id, String name, List<Integer> marks, List<Date> dates){
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void setEmpty(boolean empty) {
+        isEmpty = empty;
+    }
+    /* public Subject(int id, String name, List<Integer> marks, List<Date> dates){
         this.id = id;
         this.name = name;
         this.marks = marks;
@@ -29,6 +37,7 @@ public class Subject {
 
     public void setId(int id) {
         this.id = id;
+        setEmpty(false);
     }
 
     public void setStudent_id(int student_id) {

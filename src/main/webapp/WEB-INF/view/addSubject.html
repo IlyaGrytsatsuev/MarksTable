@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>addSubject</title>
+    <link rel="stylesheet" href="/styles/css/NewAndEditStyle.css">
 </head>
 <body>
-<a th:href="@{'/Forms/form=' + ${form_id} + '/Subjects'}">Back</a>
-<a th:href="@{/Forms}">
-    Home</a>
-<form th:method="post" th:action="@{'/Forms/addSubject:form=' + ${form_id}}">
-    <input type="text" name="subject_name">
-    <input type="submit" value="Add">
-
-</form>
+<nav>
+    <div class="links">
+        <a th:href="@{'/Forms/form=' + ${form_id} + '/Subjects'}">Back</a>
+        <a th:href="@{/Forms}">Home</a>
+    </div>
+    <p>Add subject</p>
+</nav>
+<div class="form-block">
+    <form th:method="post" th:action="@{'/Forms/addSubject:form=' + ${form_id}}">
+        <input type="text" name="subject_name" placeholder="subject name">
+        <input type="submit" value="Add">
+    </form>
+</div>
 </body>
 </html>

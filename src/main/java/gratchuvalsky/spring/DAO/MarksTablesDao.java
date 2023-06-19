@@ -68,10 +68,10 @@ public class MarksTablesDao {
     }
 
     public String getSubjectName(int subjectId){
-        List<String> res  = jdbcTemplate.query("select subject_name from subjects " +
-                "where id = ?", new Object[]{subjectId}, new BeanPropertyRowMapper(String.class));
+        String res  = jdbcTemplate.queryForObject("select subject_name from subjects " +
+                "where id = ?", new Object[]{subjectId}, String.class);
 
-        return res.get(0);
+        return res;
     }
     public void editSubject(int subjectId, String subject_name){
         jdbcTemplate.update("update subjects set subject_name = ? where id = ?",
@@ -115,7 +115,7 @@ public class MarksTablesDao {
     public List<StudentNameAndSurname> getStudentsList(int form_id) {
 
         List<StudentNameAndSurname> students_list = jdbcTemplate.query("select id, form_id, name, surname " +
-                "from students where form_id = ?",
+                "from students where form_id = ? order by surname",
                 new Object[]{form_id}, new BeanPropertyRowMapper(StudentNameAndSurname.class));
 
         return students_list;
@@ -140,6 +140,31 @@ public class MarksTablesDao {
         res.setSurname(students_list.get(0).getSurname());
         res.setStudent_id(student_id);
         return res;
+    }
+
+    public StudentSubjectsList getStudentSubjectsAndMarks(int formId, int studentId){
+        StudentSubjectsList list = jdbcTemplate.query("select subject_id, " +
+                "subject_name, mark_value, m.id, date from subjects sb join marks m on sb.id = m.subject_id " +
+                "where m.student_id = ? order by date",
+                new Object[]{studentId}, new SubjectsAndMarksMapper()).stream().findAny().orElse(null);
+
+        StudentNameAndSurname student = getStudent(studentId);
+
+        list.setStudentName(student.getName());
+        list.setStudentSurname(student.getSurname());
+
+        System.out.println(list.getSubjectsList().size());
+        for(Subject subject : list.getSubjectsList()){
+            System.out.print(subject.getName() +  " id = " + subject.getId() +": ");
+            for(int j = 0; j < subject.getDates().size(); j++){
+                System.out.print(subject.getDates().get(j) + " ");
+            }
+            System.out.println(":");
+            for(int id : subject.getMarks().keySet())
+                System.out.print(subject.getMarks().get(id) + " ");
+            System.out.println("\n");
+        }
+        return list;
     }
 
     public Subject getSubjectMarks(int student_id, int subject_id){

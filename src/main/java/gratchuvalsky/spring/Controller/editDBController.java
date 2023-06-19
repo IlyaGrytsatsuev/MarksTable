@@ -55,7 +55,17 @@ public class editDBController {
     }
 
     @GetMapping("/Students:form={form_id}/Subjects:student={student_id}")
-    public String getSubjectsList(@PathVariable("form_id") int form_id, @PathVariable("student_id") int student_id, Model model ){
+    public String getSubjectsAndMarks(@PathVariable("form_id") int form_id,
+                                      @PathVariable("student_id") int student_id,
+                                      Model model){
+        StudentSubjectsList subjectsAndMarks =
+                dao.getStudentSubjectsAndMarks(form_id, student_id);
+
+        model.addAttribute("subjectsAndMarks", subjectsAndMarks);
+        model.addAttribute("form_id", form_id);
+        return "SubjectsList";
+    }
+    /*public String getSubjectsList(@PathVariable("form_id") int form_id, @PathVariable("student_id") int student_id, Model model ){
         StudentSubjectsAndIds subjectsList = dao.getStudentSubjects(student_id, form_id);
 
         //System.out.println(subjectsList.getName() + " " + subjectsList.getSurname());
@@ -81,7 +91,8 @@ public class editDBController {
         model.addAttribute("subject", subject);
 
         return "SubjectMarks";
-    }
+    }*/
+
 
     @GetMapping("/editMark:form={form_id}:" +
             "subject={subject_id}:student={student_id}:mark={mark_id}")

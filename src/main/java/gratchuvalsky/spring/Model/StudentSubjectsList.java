@@ -14,16 +14,14 @@ public class StudentSubjectsList {
     private int form_id;
 
 
-    private List<Integer> subjects_ids;
-    private List<String> subjects_names;
+    private List<Subject> subjectsList;
 
     public StudentSubjectsList(){
         name = null;
         surname = null;
         student_id = 0;
         form_id = 0;
-        subjects_ids = new ArrayList<>();
-        subjects_names = new ArrayList<>();
+        subjectsList = new ArrayList<>();
     }
 
     public int getForm_id() {
@@ -34,12 +32,8 @@ public class StudentSubjectsList {
         return student_id;
     }
 
-    public List<Integer> getSubjects_ids() {
-        return subjects_ids;
-    }
-
-    public List<String> getSubjects_names() {
-        return subjects_names;
+    public List<Subject> getSubjectsList() {
+        return subjectsList;
     }
 
     public void setStudent_id(int student_id) {
@@ -66,19 +60,10 @@ public class StudentSubjectsList {
         this.surname = surname;
     }
 
-    public void addSubjectId(int id){
-        subjects_ids.add(id);
+    public void setSubjectsList(List<Subject> subjectsList) {
+        this.subjectsList = subjectsList;
     }
-
-    public void addSubjectName(String name){
-        subjects_names.add(name);
-    }
-
-    public void setSubjects_ids(List<Integer> subjects_ids) {
-        this.subjects_ids = subjects_ids;
-    }
-
-    public void setSubjects_names(List<String> subjects_names) {
-        this.subjects_names = subjects_names;
+    public void addSubject(Subject subject){
+        subjectsList.add(subject);
     }
 }

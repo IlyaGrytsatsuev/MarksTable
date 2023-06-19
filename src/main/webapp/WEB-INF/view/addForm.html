@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/styles/css/NewAndEditStyle.css">
 </head>
 <body>
-<a th:href="@{/Forms}">Back</a>
-<br>
-<form th:action="@{/Forms/addForm}" th:method="POST" >
-  <input type="text" name="form_name" placeholder="form name">
-  <input type="submit">
-</form>
+<nav>
+    <a th:href="@{/Forms}">Back</a>
+</nav>
+
+<div class="form-block">
+    <form th:action="@{/Forms/addForm}" th:method="POST" >
+        <input type="text" name="form_name" placeholder="form name">
+        <input type="submit">
+    </form>
+</div>
+
 </body>
 </html>

@@ -48,6 +48,7 @@ public class SpringConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/styles/css/**")
                 .addResourceLocations("classpath:/static/");
+
     }
     @Bean
     public SpringResourceTemplateResolver templateResolver(){

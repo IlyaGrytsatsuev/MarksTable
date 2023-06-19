@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/styles/css/NewAndEditStyle.css">
 </head>
 <body>
-<a th:href="@{'/Forms/form=' + ${form_id} + '/Subjects'}">Back</a>
-<a th:href="@{/Forms}">
-    Home</a>
+<nav>
+    <div class="links">
+        <a th:href="@{'/Forms/form=' + ${form_id} + '/Subjects'}">Back</a>
+        <a th:href="@{/Forms}">Home</a>
+    </div>
+    <p>Edit subject</p>
+</nav>
 
-<form th:action="@{'/Forms/editSubject:form=' + ${form_id} + ':subject=' + ${subject_id} }" th:method="PATCH" >
-    <input type="text" name="subject_name" th:value="${subject_name}" placeholder="name">
-    <input type="submit">
-</form>
+<div class="form-block">
+    <form th:action="@{'/Forms/editSubject:form=' + ${form_id} + ':subject=' + ${subject_id} }" th:method="PATCH" >
+        <input type="text" name="subject_name" th:value="${subject_name}" placeholder="name">
+        <input type="submit" value="edit">
+    </form>
+</div>
+
 
 </body>
 </html>

@@ -11,23 +11,31 @@ Back</a>
 <a th:href="@{/Forms}">
     Home</a>
 
-<p th:text = "${subjectsList.getName()} + ' ' + ${subjectsList.getSurname()}">name
+<p th:text = "${subjectsAndMarks.getStudentName()} +
+' ' + ${subjectsAndMarks.getStudentSurname()}">name
 </p>
 <hr>
 
-<tr th:if="${subjects_ids.empty}">
+<tr th:if="${subjectsAndMarks.getSubjectsList().isEmpty()}">
     <td colspan="2"> No subjects added
     </td>
 </tr>
-<br>
-
-<tr th:each="subject_name : ${subjects_names}">
-    <a th:text="${subject_name}" th:href="@{'/Forms/Students:form='
-    + ${subjectsList.getForm_id()} + '/Subjects:student=' + ${subjectsList.getStudent_id()}
-    + '/Marks:subject=' + ${subjects_ids.get(subjects_names.indexOf(subject_name))}}">name
-    </a>
-    <br>
-</tr>
+<table>
+    <tr th:each="subject :
+    ${subjectsAndMarks.getSubjectsList()}">
+        <td th:text="${subject.getName()}">
+            subject_name
+        </td>
+        <td>
+            <div th:each="mark : ${subject.getMarks()}">
+                <a th:href="@{'/Forms/editMark:form=' + ${form_id} +
+                ':subject=' + ${subject.getId()} + ':student='
+                + ${subject.getStudent_id()} + ':mark='
+                + ${mark.getKey()}}" th:text="${mark.getValue()}">mark</a>
+            </div>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>
