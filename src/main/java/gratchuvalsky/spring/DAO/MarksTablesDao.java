@@ -145,13 +145,14 @@ public class MarksTablesDao {
     public StudentSubjectsList getStudentSubjectsAndMarks(int formId, int studentId){
         StudentSubjectsList list = jdbcTemplate.query("select subject_id, " +
                 "subject_name, mark_value, m.id, date from subjects sb join marks m on sb.id = m.subject_id " +
-                "where m.student_id = ? order by date",
+                "where m.student_id = ? order by subject_name, date",
                 new Object[]{studentId}, new SubjectsAndMarksMapper()).stream().findAny().orElse(null);
 
         StudentNameAndSurname student = getStudent(studentId);
 
         list.setStudentName(student.getName());
         list.setStudentSurname(student.getSurname());
+        list.setStudent_id(studentId);
 
         System.out.println(list.getSubjectsList().size());
         for(Subject subject : list.getSubjectsList()){

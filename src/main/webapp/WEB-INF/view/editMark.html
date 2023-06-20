@@ -7,8 +7,7 @@
 <body>
 <a th:href="@{'/Forms/Students:form=' + ${form_id}
 + '/Subjects:student=' +${student_id} + '/Marks:subject=' + ${subject_id}}">Back</a>
-<a th:href="@{/Forms}">
-    Home</a>
+<a th:href="@{/Forms}">Home</a>
 
 <form th:action="@{'/Forms/editMark:form=' + ${form_id} +
         ':subject=' + ${subject_id} + ':student='

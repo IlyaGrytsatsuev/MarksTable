@@ -3,36 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Subjects</title>
+    <link rel="stylesheet" href="/styles/css/SubjectsAndMarksStyle.css">
 </head>
 <body>
-
-<a th:href="@{'/Forms/Students:form=' + ${form_id}}">
-Back</a>
-<a th:href="@{/Forms}">
-    Home</a>
-
-<p th:text = "${subjectsAndMarks.getStudentName()} +
-' ' + ${subjectsAndMarks.getStudentSurname()}">name
-</p>
-<hr>
+<nav>
+    <div class="links">
+        <a th:href="@{'/Forms/Students:form=' + ${form_id}}">
+            Back</a>
+        <a th:href="@{/Forms}">
+            Home</a>
+    </div>
+    <p th:text = "${subjectsAndMarks.getStudentName()} +
+    ' ' + ${subjectsAndMarks.getStudentSurname()}">name
+    </p>
+</nav>
 
 <tr th:if="${subjectsAndMarks.getSubjectsList().isEmpty()}">
     <td colspan="2"> No subjects added
     </td>
 </tr>
+
 <table>
-    <tr th:each="subject :
+    <tr>
+        <th>Subjects</th>
+        <th>Marks</th>
+    </tr>
+    <tr class = "subject-row" th:each="subject :
     ${subjectsAndMarks.getSubjectsList()}">
-        <td th:text="${subject.getName()}">
-            subject_name
+        <td class = "subject_name">
+                <span th:text="${subject.getName()}"></span>
+                <span>
+                <form th:action="@{'/Forms/addMark:form=' +
+                ${form_id} +':subject=' + ${subject.getId()}
+                + ':student=' + ${subject.getStudent_id()}}" th:method="GET">
+                    <input type="submit" value="+">
+                </form>
+            </span>
         </td>
-        <td>
-            <div th:each="mark : ${subject.getMarks()}">
+        <td class = "marks-column">
+            <span class="mark" th:each="mark : ${subject.getMarks()}">
                 <a th:href="@{'/Forms/editMark:form=' + ${form_id} +
                 ':subject=' + ${subject.getId()} + ':student='
-                + ${subject.getStudent_id()} + ':mark='
+                + ${subjectsAndMarks.getStudent_id()} + ':mark='
                 + ${mark.getKey()}}" th:text="${mark.getValue()}">mark</a>
-            </div>
+            </span>
         </td>
     </tr>
 </table>

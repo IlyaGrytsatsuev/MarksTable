@@ -96,9 +96,11 @@ public class editDBController {
 
     @GetMapping("/editMark:form={form_id}:" +
             "subject={subject_id}:student={student_id}:mark={mark_id}")
-    public String getEditMarkForm(@PathVariable("form_id") int form_id, @PathVariable("subject_id") int subject_id,
+    public String getEditMarkForm(@PathVariable("form_id") int form_id,
+                                  @PathVariable("subject_id") int subject_id,
                                   @PathVariable("student_id") int student_id,
-                                  @PathVariable("mark_id") int mark_id, Model model){
+                                  @PathVariable("mark_id") int mark_id,
+                                  Model model){
         model.addAttribute("form_id", form_id);
         model.addAttribute("subject_id", subject_id);
         model.addAttribute("student_id", student_id);
@@ -108,12 +110,15 @@ public class editDBController {
 
     @PatchMapping("/editMark:form={form_id}:" +
             "subject={subject_id}:student={student_id}:mark={mark_id}")
-    public String editMark(@PathVariable("mark_id") int mark_id, @RequestParam("mark_value") int mark_value,
-                           @PathVariable("form_id") String form_id, @PathVariable("student_id") String student_id,
+    public String editMark(@PathVariable("mark_id") int mark_id,
+                           @RequestParam("mark_value") int mark_value,
+                           @PathVariable("form_id") String form_id,
+                           @PathVariable("student_id") String student_id,
                            @PathVariable("subject_id") String subject_id){
         dao.editMark(mark_id, mark_value);
         return "redirect:/Forms" + "/Students:form=" + form_id
-                +"/Subjects:student=" + student_id + "/Marks:subject=" + subject_id;
+                +"/Subjects:student=" +
+                student_id ;
     }
 
     @DeleteMapping("/deleteMark:form={form_id}:" +
